@@ -1,14 +1,9 @@
-package models;
-
-//import java.sql.Connection;
 import org.sql2o.Connection;
 
-import java.util.Objects;
-
 public class News {
-   public String title;
-   public String content;
-   public int newsId;
+   private String title;
+   private String content;
+   private int newsId;
 
     public News(String title, String content) {
         this.title = title;
@@ -29,18 +24,18 @@ public class News {
     }
 
 
-    public Object save() {
+    public void save() {
         String given="INSERT INTO news (title,content)VALUES(:title,:content)";
-        try(Connection con=BD.sql20.open()){
-            return con.createQuery(given).addParameter("title",title)
-              .addParameter("content",content).executeUpdate()
-               .getKey();
+        try(Connection con= DB.sql2o.open()){
+            con.createQuery(given).addParameter("title", title)
+                    .addParameter("content", content).executeUpdate()
+                    .getKey();
         }
 
     }
     public static News all() {
         String given="SELECT *FROM news";
-        try(Connection con=DB.sql20.open()){
+        try(Connection con= DB.sql2o.open()){
             return con.createQuery(given).executeAndFetchFirst(News.class);
         }
     }
@@ -48,7 +43,7 @@ public class News {
 
     public void delete() {
         String given="DELETE  FROM news WHERE title=:title";
-        try(Connection con=DB.sql20.open()){
+        try(Connection con= DB.sql2o.open()){
             con.createQuery(given).addParameter("title",this.title).executeUpdate();
             String joinSql="DELETE FROM news_departments WHERE title=:title";
             con.createQuery(joinSql).addParameter("title",this.title).executeUpdate();

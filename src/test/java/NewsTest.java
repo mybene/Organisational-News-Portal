@@ -1,6 +1,4 @@
-package model;
-
-import models.News;
+import News;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,7 +31,7 @@ public  class NewsTest {
 
     @Test
     public void equals_returnTrueIfPropertiesAreSame_true() {
-        News news1 = new News("PM launches 2nd Eisten for Africa summit",  "bfosma bbrfgrtgrg",);
+        News news1 = new News("PM launches 2nd Eisten for Africa summit",  "bfosma bbrfgrtgrg");
         assertEquals(news1, news.equals(news1));
 
     }

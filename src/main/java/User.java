@@ -1,6 +1,5 @@
-package models;
+import org.sql2o.Connection;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class User {
@@ -37,7 +36,7 @@ public class User {
 
     public Object save() {
         String given="INSERT INTO users( name, position, dept, badgeId)VALUES(:name, :position,: dept, :badgeId)";
-        try(org.sql2o.Connection con=BD.sql20.open()){
+        try(org.sql2o.Connection con= DB.sql2o.open()){
             return con.createQuery(given).addParameter("name",name).addParameter("position",position)
                     .addParameter("dept",dept).addParameter("badgeId",badgeId).executeUpdate()
                     .getKey();
@@ -46,17 +45,26 @@ public class User {
     }
     public static List<User> all() {
         String given="SELECT *FROM users";
-        try(Connection con=DB.sql20.open()){
+        try(Connection con= DB.sql2o.open()){
             return con.createQuery(given).executeAndFetch(User.class);
         }
     }
 
-    public void deleteById(int badgeId) {
+    public void    deleteById(int badgeId) {
         String given="DELETE  FROM news WHERE badgeId=:badgeId";
-        try(org.sql2o.Connection con=DB.sql20.open()){
+        try(Connection con= DB.sql2o.open()){
             con.createQuery(given).addParameter("badgeId",this.badgeId).executeUpdate();
             String joinSql="DELETE FROM news_departments WHERE id=:id";
-            con.createQuery(joinSql).addParameter("id",this.id).executeUpdate();
+            con.createQuery(joinSql).addParameter("id",this.getBadgeId()).executeUpdate();
+        }
+    }
+
+    public void delete() {
+        String given="DELETE  FROM news WHERE badgeId=:badgeId";
+        try(Connection con= DB.sql2o.open()){
+            con.createQuery(given).addParameter("badgeId",this.badgeId).executeUpdate();
+            String joinSql="DELETE FROM news_departments WHERE id=:id";
+            con.createQuery(joinSql).addParameter("id",this.getBadgeId()).executeUpdate();
         }
     }
 }

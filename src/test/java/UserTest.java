@@ -1,7 +1,5 @@
-package model;
-
-import models.News;
-import models.User;
+import News;
+import User;
 import org.junit.Before;
 import org.junit.Test;
 
