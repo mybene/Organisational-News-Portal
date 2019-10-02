@@ -1,0 +1,28 @@
+{{# partial "content"}}
+    <div class="form-group">
+        <h4>LOGIN TO ACCESS</h4>
+        <form action="/data" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="name">Your full name</label>
+                    <input type="text" class="form-control" name="name">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="">State</label>
+                    <select id="inputState" class="form-control" name="team">
+                        <option>H.R</option>
+                        <option>Logistic</option>
+                        <option>Production</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="uesrId">Password</label>
+                    <input class="form-control" name="userId" type="password" type=" number" required>
+                </div>
+                <button type="submit" class="btn btn-primary" >Login in</button>
+            </div>
+        </form>
+
+    </div>
+{{/partial}}
+{{>layout.hbs}}

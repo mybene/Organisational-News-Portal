@@ -12,6 +12,15 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args){
         staticFileLocation("/public");
+        ProcessBuilder process = new ProcessBuilder();
+        Integer port;
+
+        if (process.environment().get("PORT") != null) {
+            port = Integer.parseInt(process.environment().get("PORT"));
+        } else {
+            port = 4567;
+        }
+        port(port);
 
         get("/",((request, response) -> {
             Map<String,Object> model=new HashMap<>();
@@ -23,14 +32,14 @@ public class App {
             return new ModelAndView(model, "departmentForm.hbs");
         }), new HandlebarsTemplateEngine());
 
-//        get("/login",((request, response) -> {
-//            Map<String,Object> model=new HashMap<>();
-//            String name=request.queryParams("dname");
-//            Integer employees= Integer.parseInt(request.queryParams("person_assigned"));
-//            model.put("name",name);
-//            model.put("person_assigned",employees);
-//            return new ModelAndView(model, "logged.hbs");
-//        }), new HandlebarsTemplateEngine());
+        get("/login",((request, response) -> {
+            Map<String,Object> model=new HashMap<>();
+            String name=request.queryParams("dname");
+//            int employees= Integer.parseInt(request.queryParams("members"));
+            model.put("dname",name);
+//            model.put("members",employees);
+            return new ModelAndView(model, "logged.hbs");
+        }), new HandlebarsTemplateEngine());
 
         post ("/login",((request, response) -> {
             Map<String,Object> model=new HashMap<>();

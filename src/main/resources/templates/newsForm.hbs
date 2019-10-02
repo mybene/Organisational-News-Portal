@@ -1,0 +1,23 @@
+{{# partial "content"}}
+    <div>
+        <div class="card-form">
+            <h3>USE THIS FORM TO ADD A NEWS</h3>
+            <form action="/news">
+                <div class="form-group" method="post">
+                    <label for="big_title">TITLE</label>
+                    <input type="text" class="form-control" name="big_title"  id="big_title ">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Content </label>
+                    <textarea class="form-control" name="contnet" id="contnet "rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+
+
+{{/partial}}
+{{>layout.hbs}}

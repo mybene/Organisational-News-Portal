@@ -1,0 +1,21 @@
+{{# partial "content"}}
+    <div class="list">
+        <h2>CREATE A DEPARTMENT </h2>
+        <form action="\login">
+            <div class="form-group row">
+                <label for="dname" class="col-sm-2 col-form-label">Name of Department</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="dname" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="person_assigned" class="col-sm-2 col-form-label">Number of employees</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="person_assigned" placeholder="Password">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </form>
+    </div>
+{{/partial}}
+{{>layout.hbs}}
