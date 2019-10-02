@@ -10,10 +10,10 @@ public class News {
    public String content;
    public int newsId;
 
-    public News(String title, String content, int newsId) {
+    public News(String title, String content) {
         this.title = title;
         this.content = content;
-        this.newsId = newsId;
+
     }
 
     public String getTitle() {
@@ -24,7 +24,7 @@ public class News {
         return content;
     }
 
-    public int getNewsId() {
+    public int getId(int i) {
         return newsId;
     }
 

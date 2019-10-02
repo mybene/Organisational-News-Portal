@@ -33,7 +33,7 @@ public  class NewsTest {
 
     @Test
     public void equals_returnTrueIfPropertiesAreSame_true() {
-        News news1 = new News("PM launches 2nd Eisten for Africa summit",  "bfosma bbrfgrtgrg");
+        News news1 = new News("PM launches 2nd Eisten for Africa summit",  "bfosma bbrfgrtgrg",);
         assertEquals(news1, news.equals(news1));
 
     }
@@ -41,16 +41,9 @@ public  class NewsTest {
     @Test
     public void saveTheNewsInDatabase() {
         news.save();
-        assertTrue( News.all().get(0).equals(news));
+        assertEquals(true,News.all().equals(news));
     }
 
-
-
-    @Test
-    public void UPdateIntoDatabase() {
-        news.save();
-        assertEquals("true", news.update());
-    }
 
     @Test
     public void deletesNews() {
