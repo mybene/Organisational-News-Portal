@@ -28,7 +28,7 @@ public  class NewsTest {
 
     @Test
     public void contentisFilledCorrectly_string() {
-        assertEquals("bfdssd", news.getContents());
+        assertEquals("bfdssd", news.getContent());
     }
 
     @Test
@@ -41,7 +41,7 @@ public  class NewsTest {
     @Test
     public void saveTheNewsInDatabase() {
         news.save();
-        Assert.assertTrue( News.all().get(0).equals(news));
+        assertTrue( News.all().get(0).equals(news));
     }
 
 
@@ -49,7 +49,7 @@ public  class NewsTest {
     @Test
     public void UPdateIntoDatabase() {
         news.save();
-        assertEquals("true", generalNews.update());
+        assertEquals("true", news.update());
     }
 
     @Test
