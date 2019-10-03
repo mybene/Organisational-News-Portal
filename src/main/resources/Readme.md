@@ -5,9 +5,9 @@
 This App is made for company or instution to share information where the employees are listed with specified department and the badge number .and the general information are entered by every employees how has the key to enter in the sysytem and this person is able to dlete the information once wished.
 ## Getting Started
 
-* Git clone.
+* Git clone. //https://github.com/mybene/Organisational-News-Portal
 * gradle build
-*create the postgres database
+* create the postgres database
 
 
 ### Installing
@@ -20,10 +20,6 @@ CREATE TABLE news (id serial PRIMARY KEY,title,content);
 CREATE TABLE departments(id serial PRIMARY KEY, dname VARCHAR, slogonVARCHAR ,membersVARCHAR , deptidVARCHAR );
 CREATE TABLE users(id erial PRIMARY KEY,name VARCHAR, position VARCHAR ,dept VARCHAR , badgeidVARCHAR ) ;
 ```
-
-## Running the tests
-
-`gradle test`
 
 ## Built With
 
