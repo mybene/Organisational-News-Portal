@@ -1,5 +1,6 @@
 {{# partial "content"}}
-    <div class="input">
+    <body>
+    <div class="container">
         <h2 style="text-align:center">CREATE A DEPARTMENT </h2>
         <form action="/all/dept" method="post">
             <div class="form-group row">
@@ -21,13 +22,29 @@
                 </div>
             </div>
             <div class="form-group row">
-            <label for="person_assigned" class="col-sm-2 col-form-label">ID of department</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" id="deptid" name="deptid" >
+                <label for="person_assigned" class="col-sm-2 col-form-label">ID of department</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="deptid" name="deptid" >
+                </div>
             </div>
-    </div>
             <button type="submit" class="btn btn-primary mb-2">Submit</button>
         </form>
     </div>
+    </body>
+
+
+    <style>
+        .container{
+        background-color:sliver;
+        border:2px solid purple;
+        }
+        form{
+        margin:80px;
+        }
+         label{
+        font-weight:bolder
+        }
+
+    </style>
 {{/partial}}
 {{>layout.hbs}}

@@ -13,50 +13,47 @@
 
 <body>
 <div class="header">
+    <nav>
+        <ul >
+            <li >
+                <a class="nav-link"  data-toggle="pill" href="/" role="tab" aria-controls="pills-profile" aria-selected="false">Home</a>
+            </li>
 
-   <div class="t text-center" >
-    <h3>A communication is key of success of a campany </h3>
-</div>
+            <li >
+                <a class="nav-link"  data-toggle="pill" href="/depts" role="tab" aria-controls="pills-profile" aria-selected="false">All departments</a>
+            </li>
+
+            <li c>
+                <a class="nav-link"  data-toggle="pill" href="/arictle/all" role="tab" aria-controls="pills-contact" aria-selected="false">News</a>
+            </li>
+
+            <li >
+                <a class="nav-link"  data-toggle="pill" href="/all/users" role="tab" aria-controls="pills-contact" aria-selected="false">All Users </a>
+            </li>
+        </ul>
+
+    </nav>
 
 
-<div class="container">
+
+<div class="container-fluid">
     {{#block "content"}}
 
 
     {{/block}}
 
 </div>
-    <a class="btn btn-success "  id="satrt"  href="/new/department" >GET STARTED</a>
-<div class="footer">
-    <p>Copyrigth|All Rigths Reserved   </p>
-</div>
+
+
 </div>
 
 </body>
-
-
     <style>
     body{
-    background-image:url('./images/departments.jpeg');
-    background-size:contain;
+    background-image:url('https://images.unsplash.com/photo-1501618669935-18b6ecb13d6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');
+    background-size:cover;
     background-repeat:no repeat;
     }
-
-   h3{
-   text-align:center;
-   padding:100px;
-   }
-
-
-    #satrt{
-    margin:100px;
-    padding:20px;
-
-    }
-    .footer{
-    margin:600px;
-    font-size:20px;
-
 </style>
 </html>
 

@@ -1,11 +1,11 @@
 {{# partial "content"}}
-    <div>
+    <div style="container">
         <div class="card-form">
-            <h3>USE THIS FORM TO ADD A NEWS</h3>
+            <h3 style="text-align:center">>USE THIS FORM TO ADD A NEWS</h3>
             <form action="/article/new" method="post">
                 <div class="form-group" method="post">
                     <label for="big_title">TITLE</label>
-                    <input type="text" class="form-control" name="title"  id="big_title ">
+                    <input type="text" class="form-control" name="title"  id="title ">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Content </label>
@@ -16,7 +16,19 @@
 
         </div>
     </div>
+<style>
 
+   .container{
+        background-color:sliver;
+        }
+        form{
+        margin:80px;
+        }
+        label{
+        font-weight:bolder;
+        }
+
+</style>
 
 
 {{/partial}}

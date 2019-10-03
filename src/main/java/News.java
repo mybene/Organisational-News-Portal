@@ -1,6 +1,8 @@
 import org.sql2o.Connection;
 import org.sql2o.Sql2oException;
 
+import java.util.List;
+
 public class News  {
    private String title;
    private String content;
@@ -36,26 +38,26 @@ public class News  {
         }
 
     }
-    public static News all() {
+    public static List<News>all() {
         String given="SELECT *FROM news";
         try(Connection con= DB.sql2o.open()){
-            return con.createQuery(given).executeAndFetchFirst(News.class);
+            return con.createQuery(given).executeAndFetch(News.class);
         }
     }
 
 
-    public void deleteById() {
-        String given="DELETE  FROM news WHERE id=:id";
+    public void delete() {
+        String given="DELETE  FROM news WHERE title=:title" ;
         try(Connection con= DB.sql2o.open()){
-            con.createQuery(given).addParameter("id",id).executeUpdate();
+            con.createQuery(given).addParameter("title",title).executeUpdate();
         }catch (Sql2oException ex){
             System.out.println(ex);
         }
 
     }
-    public static  News findById(int id) {
+    public static  News findById(int id ) {
         try(Connection con = DB.sql2o.open()){
-            return con.createQuery("SELECT * FROM news WHERE id = :id")
+            return con.createQuery("SELECT * FROM news WHERE  id= :id")
                     .addParameter("id", id) //key/value pair, key must match above
                     .executeAndFetchFirst(News.class); //fetch an individual item
         }

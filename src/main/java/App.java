@@ -26,7 +26,7 @@ public class App {
 
         get("/",((request, response) -> {
             Map<String,Object> model=new HashMap<>();
-            return new ModelAndView(model, "layout.hbs");
+            return new ModelAndView(model, "home.hbs");
         }), new HandlebarsTemplateEngine());
 
         get("/new/department",(request, response) -> {
@@ -103,21 +103,21 @@ public class App {
             article.save();
             model.put("title",title);
             model.put("content",content);
-            return new ModelAndView(model, "article.hbs");
+            return new ModelAndView(model, "received.hbs");
         }, new HandlebarsTemplateEngine());
 // to see all saved article;
         get("/arictle/all",((request, response) -> {
             Map<String,Object> model=new HashMap<>();
-//            List<News>article=News.all();
-            model.put("article",News.all());
+            List<News> article=News.all();
+            model.put("article",article);
             return new ModelAndView(model, "article.hbs");
         }), new HandlebarsTemplateEngine());
   //delete the news per id
         get("/news/:id/delete", (request, response) -> {
             Map<String, Object> article = new HashMap<>();
-            int idOfNewsToDelete = parseInt(request.params("id"));
+            int idOfNewsToDelete = Integer.parseInt(request.params("title"));
            News deleteNews= News.findById(idOfNewsToDelete); //change
-            deleteNews.deleteById();
+            deleteNews.delete();
             response.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());

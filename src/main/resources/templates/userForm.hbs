@@ -1,6 +1,6 @@
 {{# partial "content"}}
     <div class="form-group">
-        <h4>LOGIN TO ACCESS</h4>
+        <h4 style="text-align:center">LOGIN TO ACCESS</h4>
         <form action="/users" method="post">
 
                 <div class="form-group col-md-6">
@@ -24,5 +24,21 @@
         </form>
 
     </div>
+    <style>
+        form{
+        backgroung:transparent;
+        border:1px dashed red;
+        margin:80px;
+        }
+        label{
+        font-weight:bolder
+        }
+<!--         body{-->
+<!--    background-image:url('./images/departments.jpeg');-->
+<!--    background-size:contain;-->
+<!--    background-repeat:no repeat;-->
+<!--    }-->
+
+    </style>
 {{/partial}}
 {{>layout.hbs}}
