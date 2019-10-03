@@ -2,6 +2,7 @@
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,89 +28,93 @@ public class App {
             return new ModelAndView(model, "layout.hbs");
         }), new HandlebarsTemplateEngine());
 
-        get("/new/department",((request, response) -> {
+        get("/new/department",(request, response) -> {
             Map<String,Object> model=new HashMap<>();
             return new ModelAndView(model, "departmentForm.hbs");
-        }), new HandlebarsTemplateEngine());
+        }, new HandlebarsTemplateEngine());
 
-        get("/login",((request, response) -> {
-            Map<String,Object> model=new HashMap<>();
-            String name=request.queryParams("dname");
-//            int employees= Integer.parseInt(request.queryParams("members"));
-            model.put("dname",name);
-//            model.put("members",employees);
-            return new ModelAndView(model, "logged.hbs");
-        }), new HandlebarsTemplateEngine());
 
-        post ("/login",((request, response) -> {
+        post ("/all/dept",((request, response) -> {
             Map<String,Object> model=new HashMap<>();
             String dname=request.queryParams("dname");
-            Integer members= Integer.parseInt(request.queryParams("members"));
-            Integer id= Integer.parseInt(request.queryParams("id"));
-            String Slogon=request.queryParams("Slogon");
-            request.session().attribute("name",dname);
-            request.session().attribute("members",members);
-            request.session().attribute("id",id);
-            request.session().attribute("Slogon",Slogon);
+            String deptid=request.queryParams("deptid");
+            String members= request.queryParams("members");
+            String slogon=request.queryParams("slogon");
             model.put("dname",dname);
             model.put("members",members);
-            model.put("id",id);
-            model.put("Slogon",Slogon);
-            Departments department=new Departments(id,dname,Slogon,members);
-           Departments.save();
+            model.put("slogon",slogon);
+            Departments department=new Departments(deptid,dname,slogon,members);
+            department.save();
+            model.put("departmnet",department);
             return new ModelAndView(model, "logged.hbs");
         }), new HandlebarsTemplateEngine());
+//to view all list of the depts saved
+        get("/depts",(request, response) -> {
+            Map<String,Object>model=new HashMap<>();
+            model.put("departments", Departments.all());
+            return new ModelAndView(model,"AllDepartments.hbs");
+        },new HandlebarsTemplateEngine());
 
 
-
-//        get("/departments",(request, response) -> {
-//            Map<String,Object>model=new HashMap<>();
-//            List<Departments> departements= Departments.all();
-//            model.put("department",departements);
-//            return new ModelAndView(model,"AllDepartments.hbs");
-//        },new HandlebarsTemplateEngine());
-
+//to call the employee form input
         get("/user-new",((request, response) -> {
             Map<String,Object> model=new HashMap<>();
             return new ModelAndView(model, "userForm.hbs");
         }), new HandlebarsTemplateEngine());
+//notification of being saved as employee
+        post("/users",(request, response) -> {
+            Map<String,Object> model=new HashMap<>();
+            String name=request.queryParams("name");
+            String  position= request.queryParams("position");
+            String dept= request.queryParams("dept");
+            String  badgeid=request.queryParams("badgeid");
+            User employee=new User( name, position, dept, badgeid);
+            employee.save();
+            model.put("name",name);
+            model.put("position",position);
+            model.put("dept)",badgeid);
+            model.put(" badgeid" ,dept);
+            model.put("employee",employee);
+            return new ModelAndView(model, "usersaved.hbs");
+        },new HandlebarsTemplateEngine());
 
+//get list of all saved employees
+        get("/all/users",(request, response) -> {
+            Map<String,Object> model=new HashMap<>();
+            model.put("users",User.all());
+            return new ModelAndView(model, "users.hbs");
+        },new HandlebarsTemplateEngine());
+
+
+//call news form
         get("/news",((request, response) -> {
             Map<String,Object> model=new HashMap<>();
-            return new ModelAndView(model, "news.hbs");
+            return new ModelAndView(model, "newsForm.hbs");
         }), new HandlebarsTemplateEngine());
 
-        get("/hr",((request, response) -> {
+//get the written articles
+        post("/article/new", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            String title=request.queryParams("title");
+            String content=request.queryParams("content");
+            request.session().attribute("content", content);
+            request.session().attribute("title", title);
+            model.put("title",title);
+            model.put("content",content);
+            return new ModelAndView(model, "article.hbs");
+        }, new HandlebarsTemplateEngine());
+// to see all saved article;
+        get("/aricle/all",((request, response) -> {
             Map<String,Object> model=new HashMap<>();
-            return new ModelAndView(model, "HR.hbs");
+            List<News>article=new ArrayList<>();
+            model.put("article",article);
+            News.all();
+            return new ModelAndView(model, "AllArticles.hbs");
         }), new HandlebarsTemplateEngine());
 
-        get("/new/department",((request, response) -> {
-            Map<String,Object> model=new HashMap<>();
-            return new ModelAndView(model, "AllDepartments.hbs");
-        }), new HandlebarsTemplateEngine());
-
-
-
-//        post("/user-new", (request, response) -> {
-//            Map<String, Object> model = new HashMap<String, Object>();
-//            String person=request.queryParams("name");
-//            String department=request.queryParams("team");
-//            Integer password= Integer.parseInt(request.queryParams("userId"));
-//            request.session().attribute("name", person);
-//            request.session().attribute("team", department);
-//            request.session().attribute("userId", password);
-//            model.put("name",person);
-//            model.put("team",department);
-//            model.put("userId",password);
-//            return new ModelAndView(model, "AllDepartments.hbs");
-//        }, new HandlebarsTemplateEngine());
-//
 
 
     }
 
-//    private static Integer paresInt(String userId) {
-//    }
 }
 

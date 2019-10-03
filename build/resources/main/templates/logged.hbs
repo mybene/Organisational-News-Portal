@@ -1,16 +1,37 @@
 {{#partial "content"}}
     <div class="container">
+        <div class="header">
+
+
+
         <h3>YOU ARE SUCCESSFUL LOGGED IN THE FOLLOWING DEPARTMENT </h3>
-
+{{#each departments}}
         <h3>Name:{{dname}}</h3>
-        <p>Numbers of Employees:{{person_assigned}}</p>
+            <p>Slogon:{{slogon}}</p>
+{{/each}}
+
+            <nav>
+                <ul class="nav nav-pills mb-3" >
+                    <li class="nav-item">
+                        <a class="btn btn-success " href="/" >Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  data-toggle="pill" href="/user-new" role="tab" aria-controls="pills-profile" aria-selected="false">Log in as User to continuer</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"  data-toggle="pill" href="/depts" role="tab" aria-controls="pills-profile" aria-selected="false">All departments</a>
+                    </li>
 
 
+                    <li class="nav-item">
+                        <a class="nav-link"  data-toggle="pill" href="/allusers" role="tab" aria-controls="pills-contact" aria-selected="false">All Users </a>
+                    </li>
+                </ul>
 
-        <!--        <a href="#" class="badge badge-success">Success</a>-->
+            </nav>
+        </div>
 
-        <a href="/news-new" class="badge badge-success">post news</a>&nbsp,&nbsp,&nbsp,
-        <a href="/user-new" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">CREATE A USER</a>
 
 
     </div>
@@ -19,3 +40,14 @@
 
 {{/partial}}
 {{>layout.hbs}}
+
+<style>
+.container{
+    background-image:url('./images/user.jpeg');
+    background-size:cover;
+    background-repeat:no repeat;
+    }
+
+
+
+</style>

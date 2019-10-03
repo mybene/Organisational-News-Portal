@@ -6,16 +6,15 @@ public class User {
    public String name;
    public String position;
    public String dept;
-   public int badgeId;
+   public String badgeid;
+   public int id;
 
-    public User(String name, String position, String dept, int badgeId) {
+    public User(String name, String position, String dept, String badgeid) {
         this.name = name;
         this.position = position;
         this.dept = dept;
-        this.badgeId = badgeId;
+        this.badgeid = badgeid;
     }
-
-
 
     public String getName() {
         return name;
@@ -29,20 +28,31 @@ public class User {
         return dept;
     }
 
-    public int getBadgeId() {
-        return badgeId;
+    public String getBadgeid() {
+        return badgeid;
+    }
+
+    public int getId() {
+        return id;
     }
 
 
-    public Object save() {
-        String given="INSERT INTO users( name, position, dept, badgeId)VALUES(:name, :position,: dept, :badgeId)";
-        try(org.sql2o.Connection con= DB.sql2o.open()){
-            return con.createQuery(given).addParameter("name",name).addParameter("position",position)
-                    .addParameter("dept",dept).addParameter("badgeId",badgeId).executeUpdate()
-                    .getKey();
+
+
+    public  void  save() {
+        String given="INSERT INTO users(name, position,dept, badgeid) VALUES (:name, :position,:dept,:badgeid)";
+        try(Connection con= DB.sql2o.open()) {
+            con.createQuery(given)
+                    .addParameter("name", name)
+                    .addParameter("position", position)
+                    .addParameter("dept", dept)
+                    .addParameter("badgeid", badgeid)
+                    .executeUpdate();
         }
 
+
     }
+
     public static List<User> all() {
         String given="SELECT *FROM users";
         try(Connection con= DB.sql2o.open()){
@@ -53,18 +63,18 @@ public class User {
     public void    deleteById(int badgeId) {
         String given="DELETE  FROM news WHERE badgeId=:badgeId";
         try(Connection con= DB.sql2o.open()){
-            con.createQuery(given).addParameter("badgeId",this.badgeId).executeUpdate();
+            con.createQuery(given).addParameter("badgeId",this.badgeid).executeUpdate();
             String joinSql="DELETE FROM news_departments WHERE id=:id";
-            con.createQuery(joinSql).addParameter("id",this.getBadgeId()).executeUpdate();
+            con.createQuery(joinSql).addParameter("id",this.badgeid).executeUpdate();
         }
     }
 
     public void delete() {
         String given="DELETE  FROM news WHERE badgeId=:badgeId";
         try(Connection con= DB.sql2o.open()){
-            con.createQuery(given).addParameter("badgeId",this.badgeId).executeUpdate();
+            con.createQuery(given).addParameter("badgeId",this.badgeid).executeUpdate();
             String joinSql="DELETE FROM news_departments WHERE id=:id";
-            con.createQuery(joinSql).addParameter("id",this.getBadgeId()).executeUpdate();
+            con.createQuery(joinSql).addParameter("badgeid",this.badgeid).executeUpdate();
         }
     }
 }

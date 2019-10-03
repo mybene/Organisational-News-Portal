@@ -1,0 +1,11 @@
+{{#partial "content"}}
+    <h3>List of Users</h3>
+    {{#if users}}
+        {{#each users}}
+            <p><Strong>NAME OF EMPLOYEE:</Strong>:{{name}}</p>
+            <p><Strong>POSITION OF EMPLOYEE:</Strong>:{{position}}</p>
+            <p><Strong>BADGE ID OF EMPLOYEE:</Strong>:{{badgeid}}</p>
+            <p><Strong>DEPARTMENT OF EMPLOYEE:</Strong>:{{dept}}</p>
+        {{/each}}
+    {{/if}}
+{{/partial}}

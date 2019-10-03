@@ -1,15 +1,18 @@
 import org.sql2o.Connection;
 
-public class Departments {
-    public static int id;
-    public static String dname;
-    public static String  Slogon;
-    public static int members;
+import java.util.List;
 
-    public Departments(int id, String dname, String slogon, int members) {
-        this.id = id;
+public class Departments {
+    public  String deptid;
+    public  String dname;
+    public  String  slogon;
+    public  String members;
+    private  int id;
+
+    public Departments( String deptid,String dname, String slogon, String members) {
+        this.deptid = deptid;
         this.dname = dname;
-        Slogon = slogon;
+        this.slogon = slogon;
         this.members = members;
     }
 
@@ -17,40 +20,49 @@ public class Departments {
         return id;
     }
 
+    public String getDeptid() {
+        return deptid;
+    }
+
+
     public String getDname() {
         return dname;
     }
 
     public String getSlogon() {
-        return Slogon;
+        return slogon;
     }
 
-    public int getMembers() {
+    public String getMembers() {
         return members;
     }
 
-    public static void save() {
-        String given="INSERT INTO departments ( id,slogon,members,dname)VALUES(:id,:slogon,:members,:dname)";
+    public  void save() {
+        String given="INSERT INTO departments (dname, slogon,members, deptid) VALUES (:dname, :slogon, :members, :deptid)";
         try(Connection con= DB.sql2o.open()){
-            con.createQuery(given).addParameter("id", id)
-                    .addParameter("slogon", Slogon).addParameter("members", members)
-                    .addParameter("dname", dname).executeUpdate()
-                    .getKey();
+            con.createQuery(given)
+                     .addParameter("dname", dname)
+                    .addParameter("slogon", slogon)
+                    .addParameter("members", members)
+                    .addParameter("deptid", deptid)
+                    .executeUpdate();
         }
 
     }
-    public static News all() {
-        String given="SELECT *FROM departments";
-        try(Connection con= DB.sql2o.open()){
-            return con.createQuery(given).executeAndFetchFirst(News.class);
+
+    public  static List<Departments> all() {
+        try(Connection con = DB.sql2o.open()){
+            return con.createQuery("SELECT * FROM departments") //raw sql
+                    .executeAndFetch(Departments.class); //fetch a list
         }
     }
 
     public Connection addUser(Departments departments){
-        String sql="INSERT INTO departments_users (dept_Id int,badgeId int)VALUES(:dept_Id int,:badgeId int)";
+        String sql="INSERT INTO departments_users (deptid ,badgeid )VALUES(:deptid,:badgeid )";
         try(Connection con= DB.sql2o.open()){
-            return con.createQuery(sql).addParameter("dept_Id",this.getId())
-                    .addParameter("badgeId ",this.getId()).executeUpdate();
+            return con.createQuery(sql)
+                    .addParameter("deptid", deptid)
+                    .addParameter("badgeid ",this.getId()).executeUpdate();
 
         }
     }
@@ -59,8 +71,8 @@ public class Departments {
     public void delete() {
         String given="DELETE  FROM departments WHERE id=:id";
         try(Connection con= DB.sql2o.open()){
-            con.createQuery(given).addParameter("id",this.id).executeUpdate();
-            String joinSql="DELETE FROM users_departments WHERE dept_Id=:dept_Id";
+            con.createQuery(given).addParameter("deptid",this.deptid).executeUpdate();
+            String joinSql="DELETE FROM users_departments WHERE deptid=:deptid";
             con.createQuery(joinSql).addParameter("dept_Id",this.getId()).executeUpdate();
         }
     }
