@@ -1,38 +1,43 @@
 {{#partial "content"}}
+    <style>
+.container{
+background-image:url('user.jpeg');
+background-size:cover;
+background-repeat:no repeat;
+}
+nav{
+color:blue;
+font-weight:bold;
+}
+li{
+float :left}
+
+
+
+</style>
+
+
+
+
+
+
     <div class="container">
-        <div class="header">
 
 
 
-        <h3>YOU ARE SUCCESSFUL LOGGED IN THE FOLLOWING DEPARTMENT </h3>
-{{#each departments}}
-        <h3>Name:{{dname}}</h3>
-            <p>Slogon:{{slogon}}</p>
-{{/each}}
-
-            <nav>
-                <ul class="nav nav-pills mb-3" >
-                    <li class="nav-item">
-                        <a class="btn btn-success " href="/" >Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"  data-toggle="pill" href="/user-new" role="tab" aria-controls="pills-profile" aria-selected="false">Log in as User to continuer</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link"  data-toggle="pill" href="/depts" role="tab" aria-controls="pills-profile" aria-selected="false">All departments</a>
-                    </li>
 
 
-                    <li class="nav-item">
-                        <a class="nav-link"  data-toggle="pill" href="/all/users" role="tab" aria-controls="pills-contact" aria-selected="false">All Users </a>
-                    </li>
-                </ul>
 
-            </nav>
+
+
+
+        <div class="continuer">
+            <h3>YOU ARE SUCCESSFUL LOGGED IN THE  DEPARTMENT </h3>
+
+            <a class="btn btn-success" href="/user-new" >Log in as User to continue</a>
+
+
         </div>
-
-
 
     </div>
 
@@ -40,14 +45,5 @@
 
 {{/partial}}
 {{>layout.hbs}}
-
-<style>
-.container{
-    background-image:url('./images/user.jpeg');
-    background-size:cover;
-    background-repeat:no repeat;
-    }
-
-
 
 </style>

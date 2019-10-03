@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Integer.parseInt;
 import static spark.Spark.*;
 
 //import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -17,7 +18,7 @@ public class App {
         Integer port;
 
         if (process.environment().get("PORT") != null) {
-            port = Integer.parseInt(process.environment().get("PORT"));
+            port = parseInt(process.environment().get("PORT"));
         } else {
             port = 4567;
         }
@@ -81,7 +82,8 @@ public class App {
 //get list of all saved employees
         get("/all/users",(request, response) -> {
             Map<String,Object> model=new HashMap<>();
-            model.put("users",User.all());
+            List<User> users = User.all();
+            model.put("users",users);
             return new ModelAndView(model, "users.hbs");
         },new HandlebarsTemplateEngine());
 
@@ -97,21 +99,28 @@ public class App {
             Map<String, Object> model = new HashMap<String, Object>();
             String title=request.queryParams("title");
             String content=request.queryParams("content");
-            request.session().attribute("content", content);
-            request.session().attribute("title", title);
+            News article= new News(title,content);
+            article.save();
             model.put("title",title);
             model.put("content",content);
             return new ModelAndView(model, "article.hbs");
         }, new HandlebarsTemplateEngine());
 // to see all saved article;
-        get("/aricle/all",((request, response) -> {
+        get("/arictle/all",((request, response) -> {
             Map<String,Object> model=new HashMap<>();
-            List<News>article=new ArrayList<>();
-            model.put("article",article);
-            News.all();
-            return new ModelAndView(model, "AllArticles.hbs");
+//            List<News>article=News.all();
+            model.put("article",News.all());
+            return new ModelAndView(model, "article.hbs");
         }), new HandlebarsTemplateEngine());
-
+  //delete the news per id
+        get("/news/:id/delete", (request, response) -> {
+            Map<String, Object> article = new HashMap<>();
+            int idOfNewsToDelete = parseInt(request.params("id"));
+           News deleteNews= News.findById(idOfNewsToDelete); //change
+            deleteNews.deleteById();
+            response.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
 
     }

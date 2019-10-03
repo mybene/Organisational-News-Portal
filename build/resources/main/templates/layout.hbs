@@ -14,10 +14,10 @@
 <body>
 <div class="header">
 
-   <div class="t">
+   <div class="t text-center" >
     <h3>A communication is key of success of a campany </h3>
 </div>
-<a class="btn btn-success "   href="/new/department" >GET STARTED</a>
+
 
 <div class="container">
     {{#block "content"}}
@@ -26,6 +26,7 @@
     {{/block}}
 
 </div>
+    <a class="btn btn-success "  id="satrt"  href="/new/department" >GET STARTED</a>
 <div class="footer">
     <p>Copyrigth|All Rigths Reserved   </p>
 </div>
@@ -36,19 +37,25 @@
 
     <style>
     body{
-    background-image:url('./images/homepage.jpeg');
-    background-size:cover;
+    background-image:url('./images/departments.jpeg');
+    background-size:contain;
     background-repeat:no repeat;
     }
 
+   h3{
+   text-align:center;
+   padding:100px;
+   }
 
 
-    a{
-    margin-left:300px;
-    padding:300px;
+    #satrt{
+    margin:100px;
+    padding:20px;
+
     }
     .footer{
-    padding:600px
+    margin:600px;
+    font-size:20px;
 
 </style>
 </html>
